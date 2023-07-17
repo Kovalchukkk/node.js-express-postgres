@@ -1,13 +1,13 @@
 CREATE TABLE person(
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    surname VARCHAR(255)
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    surname VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE post(
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255),
-    content VARCHAR(255),
-    person_id INTEGER,
+    id SERIAL PRIMARY KEY NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content VARCHAR(255) NOT NULL,
+    person_id INTEGER NOT NULL,
     FOREIGN KEY (person_id) REFERENCES person (id)
 );
