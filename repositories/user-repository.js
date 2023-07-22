@@ -32,6 +32,7 @@ class UserRepository {
   async deleteUser(id) {
     const user = await db.query(`SELECT * FROM person WHERE id = $1`, [id]);
     if (user) {
+      await db.query(`DELETE FROM post WHERE person_id = $1`, [id]);
       await db.query(`DELETE FROM person WHERE id = $1`, [id]);
     }
     return user.rows[0];
