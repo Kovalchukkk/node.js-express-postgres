@@ -1,15 +1,6 @@
 const db = require("../db");
 
 class UserRepository {
-  async createUser(user) {
-    const { name, surname } = user;
-    const newUser = await db.query(
-      `INSERT INTO person (name, surname) VALUES ($1, $2) RETURNING *`,
-      [name, surname]
-    );
-    return newUser.rows[0];
-  }
-
   async getUsers() {
     const users = await db.query(`SELECT * FROM person`);
     return users.rows;
