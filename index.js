@@ -3,13 +3,23 @@ const dotenv = require("dotenv");
 dotenv.config();
 const userRouter = require("./routes/user-router");
 const postRouter = require("./routes/post-router");
+const roleRouter = require("./routes/role-router");
+const authRouter = require("./auth/auth-router");
+const authMiddleware = require("./middleware/authMiddleware");
+const roleMiddleware = require("./middleware/roleMiddleware");
 
 const PORT = process.env.PORT || 8080;
 
 const app = express();
 
 app.use(express.json());
-app.use("/api", userRouter);
+app.use("/auth", authRouter);
+app.use(
+  "/api",
+  [authMiddleware, roleMiddleware(["ADMIN", "USER"])],
+  userRouter
+);
 app.use("/api", postRouter);
+app.use("/api", roleRouter);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
