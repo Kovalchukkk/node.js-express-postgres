@@ -1,6 +1,11 @@
 const userRepository = require("../repositories/user-repository");
 
 class UserService {
+  async saveUser(user) {
+    const savedUser = await userRepository.saveUser(user);
+    return savedUser;
+  }
+
   async getUsers() {
     const users = await userRepository.getUsers();
     return users;
@@ -8,6 +13,11 @@ class UserService {
 
   async getOneUser(id) {
     const user = await userRepository.getOneUser(id);
+    return user;
+  }
+
+  async getOneUserByEmail(email) {
+    const user = await userRepository.getOneUserByEmail(email);
     return user;
   }
 
