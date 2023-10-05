@@ -1,7 +1,9 @@
 CREATE TABLE person(
     id SERIAL PRIMARY KEY NOT NULL,
     name VARCHAR(255) NOT NULL,
-    surname VARCHAR(255) NOT NULL
+    surname VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE post(
@@ -10,4 +12,17 @@ CREATE TABLE post(
     content VARCHAR(255) NOT NULL,
     person_id INTEGER NOT NULL,
     FOREIGN KEY (person_id) REFERENCES person (id)
+);
+
+CREATE TABLE role(
+    id SERIAL PRIMARY KEY NOT NULL,
+    name VARCHAR(255) UNIQUE NOT NULL 
+);
+
+CREATE TABLE person_role(
+    id SERIAL PRIMARY KEY NOT NULL,
+    person_id INTEGER NOT NULL,
+    role_id INTEGER NOT NULL,
+    FOREIGN KEY (person_id) REFERENCES person (id),
+    FOREIGN KEY (role_id) REFERENCES role (id)
 );
