@@ -15,11 +15,11 @@ const app = express();
 app.use(express.json());
 app.use("/auth", authRouter);
 app.use(
-  "/api",
+  "/api/users",
   [authMiddleware, roleMiddleware(["ADMIN", "USER"])],
   userRouter
 );
-app.use("/api", postRouter);
-app.use("/api", roleRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/roles", roleRouter);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
